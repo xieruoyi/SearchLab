@@ -1,0 +1,34 @@
+{
+  "runtime": {
+    "python": "3.12.14",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "processor": "Intel64 Family 6 Model 142 Stepping 12, GenuineIntel",
+    "packages": {
+      "torch": "2.15.0+cpu",
+      "transformers": "4.57.6",
+      "sentence-transformers": "5.7.0",
+      "numpy": "2.5.4",
+      "pandas": "3.1.0",
+      "pyarrow": "26.0.0",
+      "rank-bm25": "0.2.2"
+    },
+    "torch_threads": 4,
+    "torch_interop_threads": 1,
+    "cross_query_batching": false
+  },
+  "run_id": "15bf8f94d341e4f86fd49679dbd97e1e8d36db9475ec538394c32c1e2140741a",
+  "queries": 2908,
+  "inputs": {
+    "configs\\experiment.json": "96cfbd8297bc453817d061ea8c66e4849cf172860a0bfb478ce2e579c969e2a3",
+    "data\\processed\\corpus.jsonl": "19a670c7f0880b24039a9d3b4cfc2b892aa52e2f878acabcda00549d0987a8ad",
+    "data\\processed\\dev_qrels.tsv": "72550077ce61ebecc41bb7a025475243f39a8293d1f1085379f146e270aa044e",
+    "data\\processed\\dev_queries.jsonl": "0b58eca36aa28c00db0fc6f110d16e9328ed61b327fc1deccafd148e64bbaa2c",
+    "data\\processed\\split_manifest.csv": "e94d5383e290f7c9cb92938be2594923ad6c692ec07cd3e75a0f8103eeba651c",
+    "data\\processed\\train_qrels.tsv": "3970f310aab5398d6bbbbbc6dbf78fe90e1b1687082deb1f9f90132821d39bda",
+    "data\\processed\\train_queries.jsonl": "66aa979c0aa1e1d90e140684781af0cba99cb2e1b6c95fc53c60b4ccfaa19232"
+  },
+  "script_sha256": "6ed57adc18226dbfc244041182af5680ba1951a670d870ca2c1741ef1e3fea21",
+  "output_sha256": "3b2236da624fffa940c544a9b4020d1417f7423513788fdee3a2a2e5e1617c05",
+  "test_accessed": false,
+  "timing_note": "Diagnostic reranking times include tokenization and initial calls; not a warmup-controlled end-to-end benchmark."
+}

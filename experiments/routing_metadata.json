@@ -1,0 +1,62 @@
+{
+  "script_sha256": "5f92fbb49a9a20339569c7fc188990ece28ba136040e34e8a021819fed8ac432",
+  "protocol_sha256": "e9d62a40cdc18b4ccd0064bbe5fe3eb1b583cb6f98fe5f15b07a339557291ba4",
+  "retrieval_sha256": "126e2f5e245ef9915f4241c992686a2d5d8153cd57fb7b1f72b5cab97cc8fc79",
+  "gains_sha256": "3b2236da624fffa940c544a9b4020d1417f7423513788fdee3a2a2e5e1617c05",
+  "features_sha256": "caf60875554a62d2deadd15d8526dd67b0dbecd0c791de583297eb2dd9177dec",
+  "feature_columns": [
+    "query_word_count",
+    "query_character_count",
+    "bm25_top1",
+    "bm25_top1_top2_margin",
+    "bm25_top20_mean",
+    "bm25_top20_std",
+    "dense_top1",
+    "dense_top1_top2_margin",
+    "dense_top20_mean",
+    "dense_top20_std",
+    "rrf_top1_top2_margin",
+    "bm25_dense_top20_jaccard"
+  ],
+  "train_queries": 2584,
+  "dev_queries": 324,
+  "folds": [
+    {
+      "fold": 1,
+      "fit_queries": 1722,
+      "validation_queries": 862,
+      "fit_groups": 1710,
+      "validation_groups": 856,
+      "group_overlap": 0
+    },
+    {
+      "fold": 2,
+      "fit_queries": 1723,
+      "validation_queries": 861,
+      "fit_groups": 1711,
+      "validation_groups": 855,
+      "group_overlap": 0
+    },
+    {
+      "fold": 3,
+      "fit_queries": 1723,
+      "validation_queries": 861,
+      "fit_groups": 1711,
+      "validation_groups": 855,
+      "group_overlap": 0
+    }
+  ],
+  "test_accessed": false,
+  "checks": [
+    "train/dev groups disjoint",
+    "fold fit/validation groups disjoint",
+    "OOF prediction present for every training query",
+    "training-only scaler mean verified",
+    "finite pre-rerank features",
+    "exact frozen feature allowlist"
+  ],
+  "model_sha256": {
+    "logistic.pkl": "79382d4101800dd25d84b5090a354333c294676c5f40864a90963f9432c1a5aa",
+    "regression_tree.pkl": "7e36dbca4e737914268381846f7f1087fbfeb607b06c7f4f8b6746f424337575"
+  }
+}

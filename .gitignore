@@ -1,0 +1,8 @@
+.venv/
+.cache/
+__pycache__/
+data/
+*.parquet
+*.npy
+experiments/checkpoints/
+experiments/routing_models/

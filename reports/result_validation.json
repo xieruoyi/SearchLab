@@ -1,0 +1,26 @@
+{
+  "passed": true,
+  "checks": [
+    "all eligible query IDs present exactly once",
+    "persisted candidates match retrieval output",
+    "reranking preserves 20 unique candidates",
+    "gain equals reranked minus base NDCG",
+    "fixed budgets use floor",
+    "oracle dominates same-budget policies",
+    "zero/full budget endpoints match never/always"
+  ],
+  "zero_gain_diagnostics": {
+    "train": {
+      "zero_gain_queries": 978,
+      "zero_without_candidate_positive": 594,
+      "zero_with_perfect_base": 81,
+      "other_zero_gain_queries": 303
+    },
+    "dev": {
+      "zero_gain_queries": 127,
+      "zero_without_candidate_positive": 82,
+      "zero_with_perfect_base": 7,
+      "other_zero_gain_queries": 38
+    }
+  }
+}

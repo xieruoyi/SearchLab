@@ -1,0 +1,21 @@
+{
+  "script_sha256": "db7d408d3f40f8c5ea1cbed92db0dcca4e0a33edf59556dcbbf9384127788396",
+  "protocol_sha256": "67b5d8c5cf46419902388387beaf5ecfdd5cb2edde80741123ca9b74f4ea6445",
+  "startup_seconds": 7.149841699982062,
+  "document_embedding_sha256": "cb10eebd4fd17b72f8b01f6eb8b07ac161b96889584b841699a3199d1168e9c2",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "processor": "Intel64 Family 6 Model 142 Stepping 12, GenuineIntel",
+  "threads": 4,
+  "interop_threads": 1,
+  "test_accessed": false,
+  "warmup_queries": [
+    "PLAIN-10",
+    "PLAIN-100",
+    "PLAIN-1000",
+    "PLAIN-1002",
+    "PLAIN-1003",
+    "PLAIN-1004",
+    "PLAIN-1005",
+    "PLAIN-1006"
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "passed": true,
+  "checks": [
+    "exact pre-rerank feature allowlist",
+    "finite features",
+    "one held-out prediction per training query",
+    "duplicate groups stay in one fold",
+    "train/dev groups disjoint",
+    "stored model and feature fingerprints",
+    "reloaded models reproduce all dev scores",
+    "all dev budget decisions reproduce reported NDCG",
+    "random and heuristic baselines match the feasibility run"
+  ]
+}

@@ -1,0 +1,61 @@
+{
+  "models": {
+    "classification_baseline": "StandardScaler + LogisticRegression, C=1.0, max_iter=1000; target delta>gain_epsilon",
+    "regression_baseline": "DecisionTreeRegressor, max_depth=3, min_samples_leaf=20, random_state=42; target delta",
+    "heuristic": "rerank smallest RRF top1-top2 score margin first; query-ID tie break",
+    "features": [
+      "query_word_count",
+      "query_character_count",
+      "bm25_top1",
+      "bm25_top1_top2_margin",
+      "bm25_top20_mean",
+      "bm25_top20_std",
+      "dense_top1",
+      "dense_top1_top2_margin",
+      "dense_top20_mean",
+      "dense_top20_std",
+      "rrf_top1_top2_margin",
+      "bm25_dense_top20_jaccard"
+    ],
+    "forbidden_features": [
+      "qrels",
+      "actual delta",
+      "cross-encoder scores",
+      "test labels",
+      "features requiring reranking"
+    ],
+    "preprocessing": "fit on routing training folds only",
+    "disagreement_heuristic": "rerank smallest BM25/dense top-20 Jaccard first; query-ID tie break"
+  },
+  "features": [
+    "query_word_count",
+    "query_character_count",
+    "bm25_top1",
+    "bm25_top1_top2_margin",
+    "bm25_top20_mean",
+    "bm25_top20_std",
+    "dense_top1",
+    "dense_top1_top2_margin",
+    "dense_top20_mean",
+    "dense_top20_std",
+    "rrf_top1_top2_margin",
+    "bm25_dense_top20_jaccard"
+  ],
+  "cv": "3-fold GroupKFold, no shuffle",
+  "standard_deviation": "population (ddof=0), each retriever's own top 20",
+  "word_count": "whitespace split",
+  "primary_comparison": "30% budget, learned minus disagreement",
+  "classification_target": "gain > 1e-6",
+  "fixed_hyperparameters": true,
+  "dev_used_for_training": false,
+  "bootstrap": "1000 paired duplicate-group resamples of fixed policy outcomes; no refitting or budget reselection",
+  "tie_break": "ascending query ID",
+  "budgets": [
+    0,
+    0.1,
+    0.3,
+    0.5,
+    0.7,
+    1.0
+  ]
+}

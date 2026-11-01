@@ -1,0 +1,18 @@
+{
+  "dataset_url": "https://public.ukp.informatik.tu-darmstadt.de/thakur/BEIR/datasets/nfcorpus.zip",
+  "archive_sha256": "efe5be03f8c5b86a5870102d0599d227c8c6e2484328e68c6522560385671b0b",
+  "archive_md5": "a89dba18a62ef92f7d323ec890a0d38d",
+  "script_sha256": "e64bc3ec7c17165c5f9669613b5c88f92cdfe918575381f28374a62dafcb2364",
+  "config_sha256": "96cfbd8297bc453817d061ea8c66e4849cf172860a0bfb478ce2e579c969e2a3",
+  "python": "3.12.14 (main, Aug 25 2026, 14:01:42) [MSC v.1944 64 bit (AMD64)]",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "utc": "2026-11-01T20:40:05.178887+00:00",
+  "opened_archive_members": [
+    "nfcorpus/qrels/train.tsv",
+    "nfcorpus/qrels/dev.tsv",
+    "nfcorpus/corpus.jsonl",
+    "nfcorpus/queries.jsonl"
+  ],
+  "test_qrels_opened": false,
+  "duplicate_rule": "NFKC/casefold punctuation-free exact OR token-set Jaccard>=0.85; connected components"
+}

@@ -1,0 +1,24 @@
+{
+  "train": {
+    "queries": 2584,
+    "base_ndcg": 0.3298099248870217,
+    "always_ndcg": 0.33282904863694984,
+    "positive_rate": 0.3184984520123839,
+    "zero_rate": 0.3784829721362229,
+    "exact_zero_rate": 0.3784829721362229,
+    "negative_rate": 0.3030185758513932,
+    "mean_gain": 0.0030191237499281954,
+    "zero_gain_no_candidate_positive": 594
+  },
+  "dev": {
+    "queries": 324,
+    "base_ndcg": 0.3016439447727354,
+    "always_ndcg": 0.3182430125513246,
+    "positive_rate": 0.3487654320987654,
+    "zero_rate": 0.39197530864197533,
+    "exact_zero_rate": 0.39197530864197533,
+    "negative_rate": 0.25925925925925924,
+    "mean_gain": 0.016599067778589247,
+    "zero_gain_no_candidate_positive": 82
+  }
+}

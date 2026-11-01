@@ -1,0 +1,36 @@
+{
+  "passed": true,
+  "measured_query_executions": 2592,
+  "rounds": 2,
+  "policies": 4,
+  "live_candidate_pools_differing_from_offline": 0,
+  "quality": {
+    "always": {
+      "measured": 0.3182430125513246,
+      "offline": 0.3182430125513246,
+      "difference": 0.0
+    },
+    "disagreement": {
+      "measured": 0.3130371544389909,
+      "offline": 0.31303715443899094,
+      "difference": -5.551115123125783e-17
+    },
+    "never": {
+      "measured": 0.3016439447727354,
+      "offline": 0.3016439447727354,
+      "difference": 0.0
+    },
+    "regression_tree": {
+      "measured": 0.3103880295259144,
+      "offline": 0.3103880295259144,
+      "difference": 0.0
+    }
+  },
+  "checks": [
+    "324 unique queries per policy and round",
+    "identical live candidate pools across policies/rounds",
+    "reranking preserves candidate membership",
+    "exact live rerank-call counts",
+    "live quality matches offline quality"
+  ]
+}

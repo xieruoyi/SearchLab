@@ -1,0 +1,122 @@
+{
+  "project": "SearchLab: Learning When to Rerank Under Limited Compute",
+  "config_version": "fixed-retrieval-reranking-v1",
+  "seed": 42,
+  "dataset": {
+    "name": "BEIR/nfcorpus",
+    "url": "https://public.ukp.informatik.tu-darmstadt.de/thakur/BEIR/datasets/nfcorpus.zip",
+    "expected_md5": "a89dba18a62ef92f7d323ec890a0d38d",
+    "sha256": "efe5be03f8c5b86a5870102d0599d227c8c6e2484328e68c6522560385671b0b"
+  },
+  "splits": {
+    "fit": "official train, excluding groups overlapping dev",
+    "internal_validation": "3-fold GroupKFold on train duplicate groups",
+    "validation": "official dev; repeated use means development data, never final unbiased result",
+    "test": "sealed in original archive until experiment configuration is frozen",
+    "near_duplicate_token_jaccard": 0.85
+  },
+  "retrieval": {
+    "document_text": "title + newline + text",
+    "bm25": {
+      "implementation": "rank-bm25 BM25Okapi",
+      "k1": 1.5,
+      "b": 0.75,
+      "epsilon": 0.25,
+      "tokenization": "NFKC, casefold, Unicode word regex; no stemming or stopwords"
+    },
+    "dense": {
+      "model": "sentence-transformers/all-MiniLM-L6-v2",
+      "revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+      "max_sequence_length": 256,
+      "batch_size": 16,
+      "normalize_embeddings": true,
+      "similarity": "dot product (cosine)",
+      "device": "cpu"
+    },
+    "per_retriever_top_k": 100,
+    "fusion": "reciprocal rank fusion, equal weights, rank starts at 1",
+    "rrf_constant": 60,
+    "candidate_top_k": 20,
+    "tie_break": "ascending document ID",
+    "candidate_policy": "Persist a single RRF-ranked top-20 pool per query; skip retains RRF order and rerank reorders precisely this pool"
+  },
+  "reranker": {
+    "model": "cross-encoder/ms-marco-MiniLM-L2-v2",
+    "revision": "1b5cd67b15209f24824c50370e0397743aa9b787",
+    "backend": "pytorch",
+    "dtype": "float32",
+    "device": "cpu",
+    "max_pair_sequence_length": 256,
+    "truncation": "longest_first",
+    "batch_size": 8,
+    "torch_num_threads": 4,
+    "torch_num_interop_threads": 1,
+    "inference_mode": true,
+    "eval_mode": true,
+    "cross_query_batching": false
+  },
+  "evaluation": {
+    "primary_metric": "mean per-query binary-relevance NDCG@10",
+    "relevance_gain": "1 if raw grade > 0 else 0; preserve raw grades on disk",
+    "metric_rationale": "The data audit found all train grades=1 but dev grades include 1 and 2; binarize before constructing gains for a consistent target. Label explicitly as binary NDCG@10, not directly comparable with graded BEIR leaderboard values.",
+    "discount": "log2(rank+1), rank starts at 1",
+    "idcg": "all positive qrels for the query, not only retrieved candidates",
+    "unjudged": "treated as grade 0 for benchmark scoring; acknowledge incomplete judgments",
+    "no_positive_qrels": "exclude and report separately",
+    "delta": "NDCG_rerank - NDCG_base",
+    "gain_epsilon": 1e-06,
+    "budget_mode": "fixed call fraction, floor(fraction * query_count), report actual fraction",
+    "budgets": [
+      0,
+      0.1,
+      0.3,
+      0.5,
+      0.7,
+      1.0
+    ],
+    "random_seeds": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9
+    ],
+    "oracle": "diagnostic only; rank by actual delta; include fixed-fraction and at-most-budget variants",
+    "bootstrap": "paired resampling of duplicate-query groups, 1000 replicates; report 95% interval",
+    "cost_proxy": "one rerank action on 20 candidates; fixed configuration does not imply identical latency",
+    "latency": "uncached live model execution, warmup excluded, record CPU, threads, lengths, p50/p95, separate model load time"
+  },
+  "routing": {
+    "classification_baseline": "StandardScaler + LogisticRegression, C=1.0, max_iter=1000; target delta>gain_epsilon",
+    "regression_baseline": "DecisionTreeRegressor, max_depth=3, min_samples_leaf=20, random_state=42; target delta",
+    "heuristic": "rerank smallest RRF top1-top2 score margin first; query-ID tie break",
+    "features": [
+      "query_word_count",
+      "query_character_count",
+      "bm25_top1",
+      "bm25_top1_top2_margin",
+      "bm25_top20_mean",
+      "bm25_top20_std",
+      "dense_top1",
+      "dense_top1_top2_margin",
+      "dense_top20_mean",
+      "dense_top20_std",
+      "rrf_top1_top2_margin",
+      "bm25_dense_top20_jaccard"
+    ],
+    "forbidden_features": [
+      "qrels",
+      "actual delta",
+      "cross-encoder scores",
+      "test labels",
+      "features requiring reranking"
+    ],
+    "preprocessing": "fit on routing training folds only",
+    "disagreement_heuristic": "rerank smallest BM25/dense top-20 Jaccard first; query-ID tie break"
+  }
+}

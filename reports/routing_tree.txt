@@ -1,0 +1,22 @@
+|--- bm25_top20_mean <= 4.54
+|   |--- dense_top1 <= 0.39
+|   |   |--- bm25_top1_top2_margin <= 8.53
+|   |   |   |--- value: [0.01]
+|   |   |--- bm25_top1_top2_margin >  8.53
+|   |   |   |--- value: [-0.04]
+|   |--- dense_top1 >  0.39
+|   |   |--- bm25_top20_std <= 0.10
+|   |   |   |--- value: [0.10]
+|   |   |--- bm25_top20_std >  0.10
+|   |   |   |--- value: [0.02]
+|--- bm25_top20_mean >  4.54
+|   |--- query_character_count <= 58.50
+|   |   |--- dense_top1 <= 0.27
+|   |   |   |--- value: [0.05]
+|   |   |--- dense_top1 >  0.27
+|   |   |   |--- value: [-0.00]
+|   |--- query_character_count >  58.50
+|   |   |--- bm25_top20_mean <= 19.55
+|   |   |   |--- value: [0.09]
+|   |   |--- bm25_top20_mean >  19.55
+|   |   |   |--- value: [-0.02]
